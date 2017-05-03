@@ -1,0 +1,31 @@
+; This should be replaced by whatever your native language is. See
+; http://msdn.microsoft.com/en-us/library/dd318693%28v=vs.85%29.aspx
+; for the language identifiers list.
+ur := DllCall("LoadKeyboardLayout", "Str", "a0010420", "Int", 1)
+ar := DllCall("LoadKeyboardLayout", "Str", "a0000401", "Int", 1)
+
+*CapsLock::
+w := DllCall("GetForegroundWindow")
+pid := DllCall("GetWindowThreadProcessId", "UInt", w, "Ptr", 0)
+l := DllCall("GetKeyboardLayout", "UInt", pid)
+if (l = en)
+{
+    PostMessage 0x50, 0, %ar%,, A
+}
+else
+{
+    PostMessage 0x50, 0, %en%,, A
+}
+
+*CapsLock UP::
+w := DllCall("GetForegroundWindow")
+pid := DllCall("GetWindowThreadProcessId", "UInt", w, "Ptr", 0)
+l := DllCall("GetKeyboardLayout", "UInt", pid)
+if (l = en)
+{
+    PostMessage 0x50, 0, %ar%,, A
+}
+else
+{
+    PostMessage 0x50, 0, %en%,, A
+}
